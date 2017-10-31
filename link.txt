@@ -1,0 +1,2 @@
+http://perplexingtech.weebly.com/game-dev-blog/using-states-in-phaserjs-javascript-game-developement
+http://www.lessmilk.com/tutorial/flappy-bird-phaser-1
