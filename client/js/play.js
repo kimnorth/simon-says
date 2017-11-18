@@ -5,11 +5,14 @@ var playState = {
     },
     
     preload: function(){
+        
         this.testObject = {
             testFunction: function(){
                 console.log("Test function works.")
             }
         };
+        
+        
     },
     
     create: function(){
