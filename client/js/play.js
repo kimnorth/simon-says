@@ -4,11 +4,6 @@ var yellowSquare;
 var greenSquare;
 var blueSquare;
 
-// var testClass = class {
-
-       
-// }
-
 var playState = {
     
     preload: function(){
@@ -34,7 +29,7 @@ var playState = {
               "green"
             ],
             
-            colourSequence: [],
+            coloursPicked: [],
             
             getRandomNumber: function(min, max) {
                 min = Math.ceil(min);
@@ -42,16 +37,41 @@ var playState = {
                 return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
             },
             
-            randomNum: this.gameLogic,
+            // randomNum: this.gameLogic,
             
-            pickRandomColour: function(){
+            pickRandomColour: function(coloursPicked){
                 var randomNum = this.gameLogic.getRandomNumber(1, 4);
-                this.gameLogic.colourSequence.push(this.gameLogic.colours[randomNum-1])
-                for (let colour of this.gameLogic.colourSequence){
-                    console.log(colour)
-                }
-                console.log("Array of picked colours:", this.gameLogic.colourSequence);
-            }.bind(this)
+                return this.gameLogic.colours[randomNum-1]
+            }.bind(this),
+            
+            startGame: function(){
+                console.log("GAME GAME GAME");
+                var loss = false;
+                var playerArray = [];
+                
+                // Push first colour to the array
+                
+                this.gameLogic.coloursPicked.push(this.gameLogic.pickRandomColour());
+                console.log("First colour is:", this.gameLogic.coloursPicked[0])
+                
+                // While loop - don't break until the game is lost
+                
+                // Loop and printout colours
+                
+                this.gameLogic.loseChecker(this.gameLogic.coloursPicked, playerArray);
+                
+                // Use loss checker to see if the player array matches the AI array
+                
+                
+                
+            }.bind(this),
+            
+            loseChecker: function(pickedColours, playerColours){
+                var arrayPos = 0;
+                var pickedColoursLength = pickedColours.length;
+                console.log(pickedColoursLength);
+                console.log("Checking win/lose");
+            }
         }
         
     },
@@ -65,14 +85,30 @@ var playState = {
         blueSquare = game.add.sprite(600, 100, 'blue-square');
         greenSquare = game.add.sprite(100, 400, 'green-square');
         yellowSquare = game.add.sprite(600, 400, 'yellow-square');
+        startButton = game.add.sprite(350, 250, 'blue-square');
+        
+        startButton.inputEnabled = true;
+        startButton.events.onInputDown.add(this.gameLogic.startGame, this);
         
         redSquare.inputEnabled = true;
-        redSquare.events.onInputDown.add(this.clicked, this);
+        redSquare.events.onInputDown.add(this.redClicked, this);
+        
+        blueSquare.inputEnabled = true;
+        blueSquare.events.onInputDown.add(this.blueClicked, this);
         
     },
     
-    clicked: function(){
-        this.gameLogic.pickRandomColour(1, 4);
+    redClicked: function(){
+        this.gameLogic.pickRandomColour();
+        console.log('Red clicked');
+    },
+    
+    blueClicked: function(){
+        this.gameLogic.pickRandomColour();
+        console.log('Blue clicked');
     }
+    
+    // Need to change sprites to graphics drawn by Phaser. Then you can adjust
+    // other properties, e.g. the fillColour (or whatever it is called!)
     
 }
