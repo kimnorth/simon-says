@@ -31,6 +31,8 @@ var playState = {
             
             coloursPicked: [],
             
+            playerPositionInArray: 0,
+            
             getRandomNumber: function(min, max) {
                 min = Math.ceil(min);
                 max = Math.floor(max);
@@ -49,20 +51,66 @@ var playState = {
                 var loss = false;
                 var playerArray = [];
                 
-                // Push first colour to the array
+                // MAIN LOOP
                 
-                this.gameLogic.coloursPicked.push(this.gameLogic.pickRandomColour());
-                console.log("First colour is:", this.gameLogic.coloursPicked[0])
+                while(!loss){ // Currently just looping once through a turn
+                    
+                    // AI TURN
+                    
+                    var aiTurn = true;
+                    var playerTurn = false;
+                    
+                    // AI Loop - pick colour, print out colours
+                    
+                    while(aiTurn){
+                        this.gameLogic.coloursPicked.push(this.gameLogic.pickRandomColour());
+                        
+                        playerTurn = true;
+                        break
+                    }
+                    
+                    // Get length of AI array
+                    
+                    // var aiArrayLength = this.gameLogic.coloursPicked.length;
+                    // console.log("AI length is:", aiArrayLength)
+                    
+                    while(playerTurn){
+                        // Starting position of player
+                        var currentPos = 0;
+                        
+                        // Randomly pick a starting colour
+                        
+                        playerArray.push(this.gameLogic.pickRandomColour());
+                        
+                        // If the currentPos of both arrays are not the same
+                        
+                        console.log("AI:", this.gameLogic.coloursPicked[currentPos]);
+                        console.log("Player:", playerArray[currentPos]);
+                        
+                        if (playerArray[currentPos] != this.gameLogic.coloursPicked[currentPos]){
+                            break;
+                        }
+                        else {
+                            console.log("The same");
+                            break;
+                        }
+                        
+                        break
+                    }
+                    
+                    break
+                    
+                    // PLAYER TURN
+                    
+                    
                 
-                // While loop - don't break until the game is lost
+                    
                 
-                // Loop and printout colours
+                // Check To See If Won
                 
                 this.gameLogic.loseChecker(this.gameLogic.coloursPicked, playerArray);
-                
-                // Use loss checker to see if the player array matches the AI array
-                
-                
+                    
+                }
                 
             }.bind(this),
             
@@ -99,12 +147,10 @@ var playState = {
     },
     
     redClicked: function(){
-        this.gameLogic.pickRandomColour();
         console.log('Red clicked');
     },
     
     blueClicked: function(){
-        this.gameLogic.pickRandomColour();
         console.log('Blue clicked');
     }
     
