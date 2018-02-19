@@ -1,10 +1,10 @@
 {
-  "name": "chat-example",
+  "name": "simon-says-clone",
   "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
+  "description": "A clone of the popular game Simon Says built in Phaser.js framework.",
   "main": "server.js",
   "repository": "",
-  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
+  "author": "Kim North <kim.rawes.north@gmail.com>",
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
@@ -12,5 +12,9 @@
   },
   "scripts": {
     "start": "nodemon server.js"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "gulp": "^3.9.1"
   }
 }

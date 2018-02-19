@@ -1,55 +1,7 @@
-var background;
-var redSquare;
-var yellowSquare;
-var greenSquare;
-var blueSquare;
-
-var playState = {
-    
-    preload: function(){
-        
-        this.testObject = {
-            testFunction: function(){
-                console.log("Test function works.")
-                console.log(this)
-            }.bind(this)
-        },
-        
-        // **** Game Logic Object *** //
-        
-        this.gameLogic = {
-            
-            // Will eventually contain hexcodes for colours. Probably need to
-            // change sprites to graphics drawn by phaser.
-            
-            colours: [
-              "blue",
-              "red",
-              "yellow",
-              "green"
-            ],
-            
-            coloursPicked: [],
-            
-            playerPositionInArray: 0,
-            
-            getRandomNumber: function(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-            },
-            
-            // randomNum: this.gameLogic,
-            
-            pickRandomColour: function(coloursPicked){
-                var randomNum = this.gameLogic.getRandomNumber(1, 4);
-                return this.gameLogic.colours[randomNum-1]
-            }.bind(this),
-            
-            startGame: function(){
+startGame: function(){
+                
                 console.log("GAME GAME GAME");
                 var loss = false;
-                var playerArray = [];
                 
                 // MAIN LOOP
                 
@@ -63,8 +15,7 @@ var playState = {
                     // AI Loop - pick colour, print out colours
                     
                     while(aiTurn){
-                        this.gameLogic.coloursPicked.push(this.gameLogic.pickRandomColour());
-                        
+                        this.gameLogic.coloursPickedAI.push(this.gameLogic.pickRandomColour());
                         playerTurn = true;
                         break
                     }
@@ -75,23 +26,25 @@ var playState = {
                     // console.log("AI length is:", aiArrayLength)
                     
                     while(playerTurn){
-                        // Starting position of player
-                        var currentPos = 0;
                         
                         // Randomly pick a starting colour
                         
-                        playerArray.push(this.gameLogic.pickRandomColour());
+                        this.gameLogic.coloursPickedPlayer.push(this.gameLogic.pickRandomColour());
                         
                         // If the currentPos of both arrays are not the same
                         
-                        console.log("AI:", this.gameLogic.coloursPicked[currentPos]);
-                        console.log("Player:", playerArray[currentPos]);
+                        console.log("AI:", this.gameLogic.coloursPickedAI[this.gameLogic.playerPositionInArray]);
+                        console.log("Player:", this.gameLogic.coloursPickedPlayer[this.gameLogic.playerPositionInArray]);
                         
-                        if (playerArray[currentPos] != this.gameLogic.coloursPicked[currentPos]){
+                        if (this.gameLogic.coloursPickedAI[this.gameLogic.playerPositionInArray] != this.gameLogic.coloursPickedPlayer[this.gameLogic.playerPositionInArray]){
+                            this.gameLogic.coloursPickedAI = [];
+                            this.gameLogic.coloursPickedPlayer = [];
                             break;
                         }
                         else {
                             console.log("The same");
+                            this.gameLogic.coloursPickedAI = [];
+                            this.gameLogic.coloursPickedPlayer = [];
                             break;
                         }
                         
@@ -99,8 +52,6 @@ var playState = {
                     }
                     
                     break
-                    
-                    // PLAYER TURN
                     
                     
                 
@@ -145,16 +96,3 @@ var playState = {
         blueSquare.events.onInputDown.add(this.blueClicked, this);
         
     },
-    
-    redClicked: function(){
-        console.log('Red clicked');
-    },
-    
-    blueClicked: function(){
-        console.log('Blue clicked');
-    }
-    
-    // Need to change sprites to graphics drawn by Phaser. Then you can adjust
-    // other properties, e.g. the fillColour (or whatever it is called!)
-    
-}

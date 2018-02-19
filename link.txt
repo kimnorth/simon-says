@@ -1,2 +1,22 @@
 http://perplexingtech.weebly.com/game-dev-blog/using-states-in-phaserjs-javascript-game-developement
 http://www.lessmilk.com/tutorial/flappy-bird-phaser-1
+
+
+
+AI starts (loop)
+
+picks a colour
+adds it to the array
+ends the ai turn
+
+Wait a few seconds...
+Display a player turn message.
+
+Player starts (while loop)
+Player presses a button
+which adds a colour to the array
+which incremements playerposition
+which fires another function that takes the playerarray, the aiarray and the playerposition
+- and checks to see the value at postion x of both arrays matches
+- if it does, it returns
+- if it doesn't, it sets the value of playerturn to false and gameover to true
