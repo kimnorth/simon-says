@@ -96,3 +96,66 @@ startGame: function(){
         blueSquare.events.onInputDown.add(this.blueClicked, this);
         
     },
+    
+    
+    
+    
+    // Using the while loop below is locking up JS. JS is single-threaded, though
+// asynchronous.
+
+
+// Code Dump
+
+// while(!this.gameLogic.gameOver){
+                    
+//                     // AI Turn
+                    
+//                     // Currently this while loop logic doesn't work
+//                     // It freezes up the app having an infinite loop
+//                     // Need to use the functions built in to the game to 
+//                     // evaluate win or loss
+                    
+//                     while(this.gameLogic.aiTurn){
+                        
+//                         console.log("AI Turn")
+//                         this.gameLogic.coloursPickedAI.push(this.gameLogic.pickRandomColour())
+//                         this.gameLogic.illuminateAIColours(this.gameLogic.coloursPickedAI)
+                        
+//                         this.gameLogic.score++;
+//                         console.log("Current score:", this.gameLogic.score);
+//                         this.gameLogic.playerTurn = true;
+//                         this.gameLogic.aiTurn = false;
+//                     }
+                    
+//                     while(this.gameLogic.playerTurn){
+//                         // Check to see if button has been pressed
+//                         if(this.gameLogic.playerButtonPressed){
+//                             break
+//                         }
+//                     }
+                    
+//                     while(this.gameLogic.playerTurn){
+                        
+//                         // console.log("Player turn!");
+//                         // console.log("Player current position in array:", this.gameLogic.playerPosInArray);
+                        
+//                         // fire off loss checker - hard code with "red" for now
+                        
+//                         // this.gameLogic.colourButtonsActive = true;
+//                         // this.gameLogic.coloursPickedPlayer.push("red");
+                        
+//                         var lossCheckerResult = this.gameLogic.lossChecker(this.gameLogic.coloursPickedAI, this.gameLogic.coloursPickedPlayer, this.gameLogic.playerPosInArray)
+                        
+//                         if(lossCheckerResult){
+//                             console.log("Loss Checker result: ", lossCheckerResult)
+//                             this.gameLogic.playerTurn = false;
+//                             this.gameLogic.gameOver = true;
+//                             console.log("Quitting main game function.");
+//                         }
+//                         // this.gameLogic.playerTurn = false;
+                        
+//                     }
+                    
+//                     this.gameLogic.gameOver = true;
+                    
+//                 }
