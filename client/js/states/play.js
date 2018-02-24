@@ -17,9 +17,6 @@ var playState = {
             gameOver: false,
             score: 0,
             
-            // aiTurn: true,
-            // playerTurn: false,
-            
             currentTurn: 0,
             
             playerButtonPressed: false,
@@ -46,33 +43,14 @@ var playState = {
             }.bind(this),
             
             illuminateAIColours: function(aiColours){
-                console.log("AI Colours:")
-                for (colour in aiColours){
-                    console.log(aiColours[colour])
-                }
+                console.log("AI Colours:", this.coloursPickedAI)
+                // This will eventually hold logic for lighting squares
+                // for (colour in aiColours){
+                //     console.log(aiColours[colour])
+                // }
             },
-            
-            lossChecker: function(aiArray, playerArray, currentPlayerPos){
-                if(aiArray[currentPlayerPos] == playerArray[currentPlayerPos]){
-                    console.log("This matches what the AI picked.");
-                    return false;
-                }
-                else {
-                    console.log(aiArray)
-                    console.log(playerArray)
-                    console.log("The colours do not match.")
-                    return true;
-                }
-            },
-            
-            // MAIN LOOP
             
             startGame: function(){
-    
-                
-                // this.gameLogic.gameOver = true;
-                
-                
                 
             }.bind(this),
         }
@@ -80,18 +58,15 @@ var playState = {
     },
     
     create: function(){
-        
-        // Testing Functions, Objects
 
         background = game.add.sprite(0, 0, 'background');
-        redSquare = game.add.sprite(100, 100, 'red-square');
-        blueSquare = game.add.sprite(600, 100, 'blue-square');
-        greenSquare = game.add.sprite(100, 400, 'green-square');
-        yellowSquare = game.add.sprite(600, 400, 'yellow-square');
-        // startButton = game.add.sprite(350, 250, 'blue-square');
         
-        // startButton.inputEnabled = true;
-        // startButton.events.onInputDown.add(this.gameLogic.startGame, this);
+        redSquare = game.add.graphics()
+        blueSquare = game.add.graphics()
+        yellowSquare = game.add.graphics()
+        greenSquare = game.add.graphics()
+        
+        this.setupSquareButtons();
         
         redSquare.inputEnabled = true;
         redSquare.events.onInputDown.add(this.redClicked, this);
@@ -104,14 +79,33 @@ var playState = {
         
         yellowSquare.inputEnabled = true;
         yellowSquare.events.onInputDown.add(this.yellowClicked, this);
-        // this.gameLogic.startGame();
         
+    },
+    
+    setupSquareButtons: function(){
+        redSquare.beginFill(0xAF3514, 1);
+        redSquare.drawRect(20, 20, 370, 270);
+        redSquare.endFill();
+        
+        blueSquare.beginFill(0x121EA9, 1);
+        blueSquare.drawRect(410, 20, 370, 270);
+        blueSquare.endFill();
+        
+        yellowSquare.beginFill(0xD8D815, 1);
+        yellowSquare.drawRect(20, 300, 370, 280);
+        yellowSquare.endFill();
+        
+        greenSquare.beginFill(0x12B41A, 1);
+        greenSquare.drawRect(410, 300, 370, 280);
+        greenSquare.endFill();
     },
     
     redClicked: function(){
         console.log('Red clicked');
         this.gameLogic.coloursPickedPlayer.push("red");
         this.increasePlayerPos();
+        // console.log(redSquare)
+        // redSquare.tint = '#fff'
     },
     
     blueClicked: function(){
@@ -163,12 +157,7 @@ var playState = {
                 // If the player's array length is > 0, then compare
                 // the player's position in both arrays
                 
-                console.log("AI colours:", this.gameLogic.coloursPickedAI)
-                
-                if(this.gameLogic.coloursPickedPlayer[this.gameLogic.playerPosInArray-1] == this.gameLogic.coloursPickedAI[this.gameLogic.playerPosInArray-1]){
-                    console.log("Correct")
-                }
-                else if(this.gameLogic.coloursPickedPlayer[this.gameLogic.playerPosInArray-1] != this.gameLogic.coloursPickedAI[this.gameLogic.playerPosInArray-1]){
+                if(this.gameLogic.coloursPickedPlayer[this.gameLogic.playerPosInArray-1] != this.gameLogic.coloursPickedAI[this.gameLogic.playerPosInArray-1]){
                     this.gameLogic.gameOver = true;
                 }
                 
