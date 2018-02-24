@@ -39,21 +39,46 @@ var playState = {
             
             pickRandomColour: function(coloursPicked){
                 var randomNum = this.gameLogic.getRandomNumber(1, 4);
-                return this.gameLogic.colours[randomNum-1]
+                return this.gameLogic.colours[randomNum-1];
             }.bind(this),
             
             illuminateAIColours: function(aiColours){
-                console.log("AI Colours:", this.coloursPickedAI)
-                // This will eventually hold logic for lighting squares
-                // for (colour in aiColours){
-                //     console.log(aiColours[colour])
-                // }
+                console.log("AI Colours:", this.coloursPickedAI);
+                
+                for (colour in aiColours){
+                    
+                    switch(aiColours[colour]) {
+                        case 'red':
+                            console.log('tint red')
+                            break;
+                        case 'yellow':
+                            console.log('yellow tint')
+                            break;
+                        case 'blue':
+                            console.log('blue tint')
+                            break;
+                        case 'green':
+                            console.log('green tint')
+                            break;
+                        default:
+                            console.log("Not red")
+                    }
+                }
+                
+                // At the moment the aiCOlours array only has words. It needs some
+                // logic here to say if 'red' then change the tint on red square
+                
+                // change the tint of the colour
+                
+                // create a timed phaser event to turn it back of half a second
+                
+                
             },
             
-            startGame: function(){
-                
-            }.bind(this),
-        }
+            tintSquare: function(square, colour){
+                square.tint = colour
+            }
+        };
         
     },
     
@@ -194,23 +219,3 @@ var playState = {
 
 
 
-
-
-// Let's try this:
-
-// Use the update function to see what turn it is
-
-// If it's the AI's turn, call the function that picks a colour and illuminates
-// the buttons
-// Within the above stage, there is a function that updates to the player's turn
-
-// On player's turn call a function that checks to see if the game has ended
-
-// When the player clicks on a square, it triggers a function that adds that
-// colour to the array and then checks to see if it matches what the AI had in
-// their hand at that position. 
-// If it does, then nothing happens.
-// If it doesn't then gameOver is set to true and the update function
-// triggers gameOver load state.
-// When the length of the player's hand matches the length of the AI's hand, as
-// gameOver hasn't been triggered, it changes to the AI's turn
